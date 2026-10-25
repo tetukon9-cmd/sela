@@ -30,6 +30,8 @@ public sealed class NotchState : INotifyPropertyChanged
     public bool CalendarLoading { get => _calendarLoading; set => Set(ref _calendarLoading, value); }
     /// <summary>Ticks every second so countdowns can re-render.</summary>
     public DateTime Now { get => _now; set => Set(ref _now, value); }
+    private FocusSnapshot _focus = new(FocusSession.Focus, FocusStatus.Ready, FocusTimer.Duration(FocusSession.Focus));
+    public FocusSnapshot Focus { get => _focus; set => Set(ref _focus, value); }
     private bool _adhanPlaying;
     /// <summary>True while the adzan is sounding; the notch shows a stop control.</summary>
     public bool AdhanPlaying { get => _adhanPlaying; set => Set(ref _adhanPlaying, value); }
@@ -58,6 +60,10 @@ public sealed class NotchState : INotifyPropertyChanged
 /// <summary>Actions views can ask the shell to perform.</summary>
 public interface IAppCommands
 {
+    void SelectFocus(FocusSession session);
+    void StartFocus();
+    void PauseFocus();
+    void ResetFocus();
     void OpenSettings();
     /// <summary>Opens a meeting link. The shell only launches https URLs.</summary>
     void OpenJoinUrl(string url);

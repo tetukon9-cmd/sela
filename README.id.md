@@ -31,6 +31,7 @@ Sela duduk di atas layar sebagai pill hitam kecil. Pill itu menampilkan sholat b
 - **Hadits harian** dari Arbain Nawawi, dalam teks Arab beserta terjemahan Indonesia atau Inggris.
 - **Agenda meeting** dari Outlook (aplikasi klasik) dan Google Calendar, lengkap dengan tanda sumbernya dan tombol **Join** untuk Teams, Zoom, Google Meet, dan Webex.
 - **Bahasa Indonesia dan Inggris**: mengikuti bahasa Windows secara default, dan bisa diganti kapan saja di Pengaturan.
+- **Timer fokus**: tab Fokus menyediakan fokus 25 menit, istirahat singkat 5 menit, dan istirahat panjang 15 menit, dengan mulai, jeda/lanjut, reset, serta kartu selesai. Sesi berjalan lokal, dipilih manual, dan berakhir saat Sela ditutup.
 - **Bisa dipindah**: geser notch ke kiri, kanan, atau ke tepi bawah layar. Sela mengingat posisinya.
 - **Maskot yang hidup**: fajar, siang, sore, dan malam punya tampilan sendiri, bergerak pelan, dan melirik ke arah kursor.
 - **Tetap jalan saat offline**: jadwal dan hadits disimpan di perangkat.
@@ -173,6 +174,8 @@ git push origin v1.1.0
 ```
 
 ## Kredit
+
+- Inspirasi fitur timer fokus: Nusa oleh Rama. Implementasi Sela ditulis sendiri tanpa menyertakan kode atau aset Nusa. Lihat [inspeksi statis dan batas integrasi](docs/nusa-static-analysis.md).
 
 - Jadwal sholat dan hadits Indonesia: Kemenag RI melalui [api.myquran.com](https://api.myquran.com).
 - Jadwal sholat di luar Indonesia: [Aladhan](https://aladhan.com).

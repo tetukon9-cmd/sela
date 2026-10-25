@@ -20,9 +20,9 @@ public partial class NotchWindow
     private readonly ObservableCollection<HabitRow> _habitRows = new();
     private Hadith? _shownHadith;
 
-    private enum Tab { Sholat, Agenda, Hadits }
+    private enum Tab { Sholat, Agenda, Hadits, Focus }
 
-    private Tab CurrentTab => TabHadits.IsChecked == true ? Tab.Hadits : TabAgenda.IsChecked == true ? Tab.Agenda : Tab.Sholat;
+    private Tab CurrentTab => TabFocus.IsChecked == true ? Tab.Focus : TabHadits.IsChecked == true ? Tab.Hadits : TabAgenda.IsChecked == true ? Tab.Agenda : Tab.Sholat;
 
     /// <summary>Opens the panel on the "Hadits" tab (tray item, hadith card "Baca").</summary>
     public void ShowHadith()
@@ -78,6 +78,8 @@ public partial class NotchWindow
     {
         switch (CurrentTab)
         {
+            case Tab.Focus:
+                return MeasureHeight(FocusContent);
             case Tab.Hadits:
                 return double.PositiveInfinity; // clamps to max
             case Tab.Agenda:
@@ -179,6 +181,7 @@ public partial class NotchWindow
         ReminderKind.PrayerNow => (SholatColor, "\uE708", 25),  // crescent
         ReminderKind.Habit => (SholatColor, "\uEB51", 20),      // heart
         ReminderKind.Hadith => (SholatColor, "\uE82D", 15),     // book
+        ReminderKind.Focus => (MeetingColor, "\uE916", 20),    // stopwatch
         _ => (r.Source is { } s ? SourceColor(s) : MeetingColor, "\uE787", 25), // calendar
     };
 
@@ -246,15 +249,16 @@ public partial class NotchWindow
     {
         Tab.Agenda => AgendaPage,
         Tab.Hadits => HaditsPage,
+        Tab.Focus => FocusPage,
         _ => SholatPage,
     };
 
     private void Tab_Checked(object sender, RoutedEventArgs e)
     {
-        if (SholatPage is null || AgendaPage is null || HaditsPage is null || TabHadits is null) return; // during InitializeComponent
+        if (SholatPage is null || AgendaPage is null || HaditsPage is null || FocusPage is null || TabFocus is null) return; // during InitializeComponent
         var tab = CurrentTab;
         var show = PageOf(tab);
-        foreach (var p in new[] { SholatPage, AgendaPage, HaditsPage })
+        foreach (var p in new[] { SholatPage, AgendaPage, HaditsPage, FocusPage })
             if (!ReferenceEquals(p, show)) p.Visibility = Visibility.Collapsed;
         show.Visibility = Visibility.Visible;
         UpdatePanelHeight();
@@ -276,6 +280,11 @@ public partial class NotchWindow
     /// <summary>Header first, then the body (Hadits) or each row 25 ms after the previous one.</summary>
     private void StaggerPage(Tab tab, int delay)
     {
+        if (tab == Tab.Focus)
+        {
+            Rise(FocusContent, delay);
+            return;
+        }
         if (tab == Tab.Hadits)
         {
             Rise(HaditsHeader, delay);
