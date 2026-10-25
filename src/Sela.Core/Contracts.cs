@@ -63,7 +63,7 @@ public interface ICalendarProvider
     Task<IReadOnlyList<CalendarEvent>> GetEventsAsync(DateTime from, DateTime to, CancellationToken ct);
 }
 
-public enum ReminderKind { PrayerSoon, PrayerNow, Meeting, Habit, Hadith }
+public enum ReminderKind { PrayerSoon, PrayerNow, Meeting, Habit, Hadith, Focus }
 
 /// <summary>Daily ibadah check-ins Sela asks about.</summary>
 public enum Habit { DzikirPagi, DzikirPetang, Sholawat }

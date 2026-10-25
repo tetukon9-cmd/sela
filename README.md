@@ -31,6 +31,7 @@ Sela sits at the top of your screen as a small black pill. It shows the next pra
 - **Daily hadith** from the Forty Hadith of an-Nawawi, in Arabic with an English or Indonesian translation.
 - **Meetings** from Outlook (classic desktop app) and Google Calendar, each marked with its source, with a **Join** button for Teams, Zoom, Google Meet, and Webex.
 - **English and Indonesian**: follows your Windows language by default, and you can switch at any time in Settings.
+- **Focus timer**: the Focus tab offers 25-minute focus, 5-minute short breaks, and 15-minute long breaks, with start, pause/resume, reset, and a completion card. Sessions are local, manually selected, and end when Sela closes.
 - **Place it where you like**: drag the notch along the top or bottom edge of the screen. Sela remembers the spot.
 - **A living mascot** with its own look for dawn, day, dusk, and night. It moves slowly and glances toward your cursor.
 - **Works offline**: schedules and hadith are cached on your PC.
@@ -173,6 +174,8 @@ git push origin v1.1.0
 ```
 
 ## Credits
+
+- Focus-timer feature inspiration: Nusa by Rama. Sela's implementation is original; no Nusa code or assets are bundled. See the [static inspection and integration boundary](docs/nusa-static-analysis.md).
 
 - Indonesian prayer times and hadith: Kemenag RI through [api.myquran.com](https://api.myquran.com).
 - Prayer times outside Indonesia: [Aladhan](https://aladhan.com).

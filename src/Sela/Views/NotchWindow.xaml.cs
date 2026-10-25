@@ -929,5 +929,6 @@ public partial class NotchWindow : Window, INotchHost
 
         // panel: hadits
         RefreshHadith();
+        RefreshFocus();
     }
 }

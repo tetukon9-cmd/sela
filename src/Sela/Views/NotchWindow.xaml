@@ -454,10 +454,10 @@
                 <!-- top bar: centered segmented switch, quiet settings on the right -->
                 <Grid x:Name="PanelTop">
                   <Grid.RenderTransform><TranslateTransform/></Grid.RenderTransform>
-                  <Border Width="228" Height="30" CornerRadius="15" Background="#141417" BorderBrush="#1C1C20" BorderThickness="1"
-                          Padding="2" HorizontalAlignment="Center">
+                  <Border Width="264" Height="30" CornerRadius="15" Background="#141417" BorderBrush="#1C1C20" BorderThickness="1"
+                          Padding="2" HorizontalAlignment="Left">
                     <Grid>
-                      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
                       <Border x:Name="SegmentThumb" CornerRadius="12.5" Background="#2A2A30">
                         <Border.Effect>
                           <DropShadowEffect BlurRadius="6" ShadowDepth="1" Direction="270" Opacity="0.5" Color="#000000"/>
@@ -467,12 +467,42 @@
                       <RadioButton x:Name="TabSholat" Style="{StaticResource Segment}" FontSize="12" Content="{Binding [Notch_TabSholat], Source={x:Static l:Loc.Instance}}" IsChecked="True" Checked="Tab_Checked"/>
                       <RadioButton x:Name="TabAgenda" Grid.Column="1" Style="{StaticResource Segment}" FontSize="12" Content="{Binding [Notch_TabAgenda], Source={x:Static l:Loc.Instance}}" Checked="Tab_Checked"/>
                       <RadioButton x:Name="TabHadits" Grid.Column="2" Style="{StaticResource Segment}" FontSize="12" Content="{Binding [Notch_TabHadits], Source={x:Static l:Loc.Instance}}" Checked="Tab_Checked"/>
+                      <RadioButton x:Name="TabFocus" Grid.Column="3" Style="{StaticResource Segment}" FontSize="12" Content="{Binding [Notch_TabFocus], Source={x:Static l:Loc.Instance}}" Checked="Tab_Checked"/>
                     </Grid>
                   </Border>
                   <Button Style="{StaticResource GhostButton}" HorizontalAlignment="Right" Margin="0,0,-4,0" Click="Settings_Click"
                           ToolTip="{Binding [Notch_Settings], Source={x:Static l:Loc.Instance}}" AutomationProperties.Name="{Binding [Notch_Settings], Source={x:Static l:Loc.Instance}}">
                     <TextBlock Style="{StaticResource Icon}" Text="&#xE713;" FontSize="13"/>
                   </Button>
+                </Grid>
+
+                <!-- Focus: original local timer, using the existing Sela palette and controls -->
+                <Grid x:Name="FocusPage" Grid.Row="1" Margin="0,16,0,0" Visibility="Collapsed">
+                  <StackPanel x:Name="FocusContent">
+                    <TextBlock Text="{Binding [Focus_Choose], Source={x:Static l:Loc.Instance}}" FontSize="12"
+                               Foreground="{StaticResource TextSecondary}" Margin="0,0,0,6"/>
+                    <ComboBox x:Name="FocusSessionPicker" SelectedIndex="0" SelectionChanged="FocusSession_Changed"
+                              FontSize="13" Foreground="#161618" MinHeight="30"
+                              AutomationProperties.Name="{Binding [Focus_Choose], Source={x:Static l:Loc.Instance}}">
+                      <ComboBoxItem Content="{Binding [Focus_FocusOption], Source={x:Static l:Loc.Instance}}"/>
+                      <ComboBoxItem Content="{Binding [Focus_ShortBreakOption], Source={x:Static l:Loc.Instance}}"/>
+                      <ComboBoxItem Content="{Binding [Focus_LongBreakOption], Source={x:Static l:Loc.Instance}}"/>
+                    </ComboBox>
+                    <TextBlock x:Name="FocusCountdown" Text="25:00" FontSize="48" FontWeight="SemiBold"
+                               FontFamily="{StaticResource DisplayFont}" Typography.NumeralAlignment="Tabular"
+                               HorizontalAlignment="Center" Margin="0,14,0,0"/>
+                    <TextBlock x:Name="FocusStatusText" FontSize="12" Foreground="{StaticResource TextSecondary}"
+                               HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                      <Button x:Name="FocusToggle" Style="{StaticResource PillButton}" Click="FocusToggle_Click"
+                              Content="{Binding [Focus_Start], Source={x:Static l:Loc.Instance}}" MinWidth="90"/>
+                      <Button x:Name="FocusReset" Style="{StaticResource PillButton}" Click="FocusReset_Click"
+                              Content="{Binding [Focus_Reset], Source={x:Static l:Loc.Instance}}" Margin="8,0,0,0"
+                              Background="{StaticResource SurfaceRaised}" Foreground="{StaticResource TextPrimary}"/>
+                    </StackPanel>
+                    <TextBlock Text="{Binding [Focus_Hint], Source={x:Static l:Loc.Instance}}" TextWrapping="Wrap"
+                               FontSize="11.5" Foreground="{StaticResource TextSecondary}" Margin="0,16,0,0"/>
+                  </StackPanel>
                 </Grid>
 
                 <!-- Sholat -->

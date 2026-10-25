@@ -398,6 +398,7 @@ public partial class App : Application, IAppCommands
 
     private void ClockTick()
     {
+        UpdateFocus();
         var now = DateTime.Now;
         _state.Now = now;
         _state.Next = ReminderScheduler.NextPrayer(now, _today, _tomorrow);
